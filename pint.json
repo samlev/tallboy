@@ -1,0 +1,21 @@
+{
+  "preset": "psr12",
+  "rules": {
+    "no_unused_imports": true,
+    "array_syntax": {
+      "syntax": "short"
+    }
+  },
+  "notName": [
+    "*.blade.php",
+    "*.stub",
+    "*.css",
+    "*.scss",
+    "*.js",
+    "*.json",
+    "*.svg"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

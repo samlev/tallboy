@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Tallboy" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+  <description>The coding standard for Tallboy.</description>
+
+  <!-- Exclude directories -->
+  <exclude-pattern>node_modules/*</exclude-pattern>
+  <exclude-pattern>vendor/*</exclude-pattern>
+  <exclude-pattern>resources/*</exclude-pattern>
+
+  <!-- Use the PSR-12 coding standard -->
+  <rule ref="PSR12" />
+</ruleset>
