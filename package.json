@@ -1,0 +1,22 @@
+{
+  "name": "tallboy",
+  "version": "1.0.0",
+  "description": "A drawer full of with Blade components built with Tailwind, AlpineJS, Laravel, and Livewire.",
+  "main": "dist/tallboy.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samuel Levy",
+  "license": "MIT",
+  "dependencies": {
+    "alpinejs": "^3.14.0",
+    "postcss-import": "^16.1.0",
+    "tailwindcss": "^3.4.4"
+  },
+  "devDependencies": {
+    "esbuild": "0.21.5"
+  }
+}
