@@ -1,0 +1,44 @@
+name: Bug Report
+description: Report a general library issue.
+labels: [bug]
+body:
+  - type: input
+    attributes:
+      label: Library version
+      description: "Please provide the full version of Tallboy that you're experiencing the bug with."
+      placeholder: "v1.0.0"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Livewire version
+      description: "Please provide the full version of Livewire that you're experiencing the bug with."
+      placeholder: "v3.5.0"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Laravel version
+      description: "Please provide the full version of Laravel that you're experiencing the bug with."
+      placeholder: "v10.0.0"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: PHP version
+      description: "Please provide the full version of PHP that you're experiencing the bug with."
+      placeholder: "v8.2.0"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+      description: "Please describe what is happening and what you expect to happen."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: "Please provide accurate steps to reproduce the bug."
+    validations:
+      required: true

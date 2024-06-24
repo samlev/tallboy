@@ -44,25 +44,21 @@
         }
     ],
     "scripts": {
-        "test:lint": [
+        "test:types": "phpstan analyse",
+        "test:unit": "pest",
+        "lint": [
             "pint --test",
-            "phpcs src/"
+            "phpcs src/",
+            "@test:types"
         ],
         "lint:fix": [
             "pint",
             "phpcbf src/",
-            "@test:lint"
+            "@lint"
         ],
-        "test:types": "phpstan analyse",
-        "test:unit": "pest",
         "test": [
-            "@test:lint",
-            "@test:types",
+            "@lint",
             "@test:unit"
-        ],
-        "lint": [
-            "@php vendor/bin/pint",
-            "@php vendor/bin/phpstan analyse"
         ]
     },
     "config": {
