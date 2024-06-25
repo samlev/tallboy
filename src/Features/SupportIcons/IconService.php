@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Concerns\Icons;
+namespace Tallboy\Features\SupportIcons;
 
 use BladeUI\Icons\Svg;
-use Tallboy\Exception\Icons\InvalidIconException;
-use Tallboy\Exception\Icons\InvalidIconSetException;
+use Tallboy\Exceptions\Icons\InvalidIconException;
+use Tallboy\Exceptions\Icons\InvalidIconSetException;
+use Tallboy\Icons\IconSet;
 
 class IconService
 {

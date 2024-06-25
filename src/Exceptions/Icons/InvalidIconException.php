@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Exception\Icons;
+namespace Tallboy\Exceptions\Icons;
 
 class InvalidIconException extends \RuntimeException
 {

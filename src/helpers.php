@@ -2,18 +2,33 @@
 
 declare(strict_types=1);
 
-use BladeUI\Icons\Svg;
-use Tallboy\Concerns\Icons\IconService;
+if (! function_exists('attrs')) {
+    function attrs(mixed $slot): \Illuminate\View\ComponentAttributeBag
+    {
+        return app('tallboy-view')->attributes($slot);
+    }
+}
+
+if (! function_exists('isSlot')) {
+    function isSlot(mixed $slot): bool
+    {
+        return app('tallboy-view')->isSlot($slot);
+    }
+}
+
+if (! function_exists('hasSlot')) {
+    function hasSlot(mixed $slot): bool
+    {
+        return app('tallboy-view')->hasSlot($slot);
+    }
+}
 
 if (! function_exists('icon')) {
     /**
-     * @param string $name
-     * @param string $class
      * @param array<array-key, mixed> $attributes
-     * @return Svg
      */
-    function icon(string $name, string $class = '', array $attributes = []): Svg
+    function icon(string $name, string $class = '', array $attributes = []): \BladeUI\Icons\Svg
     {
-        return app(IconService::class)->icon($name, $class, $attributes);
+        return app('tallboy-icon')->icon($name, $class, $attributes);
     }
 }

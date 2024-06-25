@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-use Tallboy\Concerns\Icons\IconService;
-use Tallboy\Concerns\Icons\IconSet;
-use Tallboy\Exception\Icons\InvalidIconSetException;
+use Tallboy\Exceptions\Icons\InvalidIconSetException;
+use Tallboy\Features\SupportIcons\IconService;
+use Tallboy\Icons\FeathericonSet;
+use Tallboy\Icons\HeroiconSet;
+use Tallboy\Icons\IconSet;
 
 it('registers default icon sets', function () {
     $service = app(IconService::class);
@@ -17,7 +19,7 @@ it('registers default icon sets', function () {
 it('allows custom icon sets', function () {
     app('config')->set('tallboy.icons.sets', [
         BuzzIconSet::class,
-        \Tallboy\Concerns\Icons\Sets\HeroiconSet::class,
+        HeroiconSet::class,
     ]);
 
     $service = app(IconService::class);
@@ -49,8 +51,8 @@ it('selects the configured icon set if the default is set', function () {
 
     $sets = [
         BuzzIconSet::class,
-        \Tallboy\Concerns\Icons\Sets\FeathericonSet::class,
-        \Tallboy\Concerns\Icons\Sets\HeroiconSet::class,
+        FeathericonSet::class,
+        HeroiconSet::class,
     ];
 
     // ensure the default is not the first set
@@ -80,8 +82,8 @@ it('selects the first non-tallboicon icon set if the default is not set', functi
 
     $sets = $r->shuffleArray([
         BuzzIconSet::class,
-        \Tallboy\Concerns\Icons\Sets\FeathericonSet::class,
-        \Tallboy\Concerns\Icons\Sets\HeroiconSet::class,
+        FeathericonSet::class,
+        HeroiconSet::class,
     ]);
 
     app('config')->set('tallboy.icons', [

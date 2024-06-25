@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Concerns\Icons\Sets;
-
-use Tallboy\Concerns\Icons\IconSet;
+namespace Tallboy\Icons;
 
 class TallboiconSet implements IconSet
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Tallboy\Concerns\Icons\IconService;
-use Tallboy\Concerns\Icons\IconSet;
-use Tallboy\Exception\Icons\InvalidIconSetException;
-use Tallboy\Exception\Icons\InvalidIconException;
+use Tallboy\Exceptions\Icons\InvalidIconException;
+use Tallboy\Exceptions\Icons\InvalidIconSetException;
+use Tallboy\Features\SupportIcons\IconService;
+use Tallboy\Icons\IconSet;
 
 it('can register enabled icon sets', function () {
     $service = new IconService();

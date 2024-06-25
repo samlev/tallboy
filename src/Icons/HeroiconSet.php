@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Concerns\Icons\Sets;
+namespace Tallboy\Icons;
 
-use Tallboy\Concerns\Icons\IconSet;
+use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 
 class HeroiconSet implements IconSet
 {
@@ -15,7 +15,7 @@ class HeroiconSet implements IconSet
 
     public function enabled(): bool
     {
-        return class_exists('BladeUI\Heroicons\BladeHeroiconsServiceProvider');
+        return class_exists(BladeHeroiconsServiceProvider::class);
     }
 
     public function icons(): array

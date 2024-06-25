@@ -15,15 +15,34 @@ return [
     'icons' => [
         // Force a specific icon set: 'tallboicon', 'heroicon', 'feathericon'
         'default' => null,
-        // Alternative icon sets
+
+        // Alternative icon sets (the tallboicon set is always available)
         'sets' => [
-            \Tallboy\Concerns\Icons\Sets\HeroiconSet::class,
-            \Tallboy\Concerns\Icons\Sets\FeathericonSet::class,
+            \Tallboy\Icons\HeroiconSet::class,
+            \Tallboy\Icons\FeathericonSet::class,
         ],
 
         // You can override specific icons here, including using your own custom icons.
         'custom' => [
-            // @see src/Icons/Icons.md
+            // 'alert' => 'heroicon-alert',
         ]
     ],
+
+    /*
+    |---------------------------------------------------------------------------
+    | Components
+    |---------------------------------------------------------------------------
+    |
+    | This allows configuration of the componemts available from Tallboy.
+    | Tallboy provides a number of blade components, broken up loosely
+    | into related groups. This allows subtituting your components.
+    |
+    */
+    'components' => [
+        'icon' => \Tallboy\View\Components\Icon::class,
+        'form' => [
+            'label' => \Tallboy\View\Components\Form\Label::class,
+        ],
+        'feedback' > [],
+    ]
 ];

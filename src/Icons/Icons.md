@@ -1,5 +1,5 @@
 Icons
-====================
+=====
 
 Tallboy uses SVG icons for a number of its components. These icons are added into the system through the
 [Blade Icons](https://blade-ui-kit.com/blade-icons) package. By default, Tallboy uses a minimal set of icons provided in
@@ -54,7 +54,7 @@ If you want to use a custom icon set, you can do so by creating a new icon set c
 ```php
 namespace App\Icons;
 
-use Tallboy\Concerns\Icons\IconSet;
+use Tallboy\Icons\IconSet;
 
 class FontAwesomeIconSet implements IconSet
 {

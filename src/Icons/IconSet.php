@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Concerns\Icons;
+namespace Tallboy\Icons;
 
 interface IconSet
 {

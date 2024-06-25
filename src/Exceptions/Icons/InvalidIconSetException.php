@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Exception\Icons;
+namespace Tallboy\Exceptions\Icons;
 
-use Tallboy\Exception\InvalidConfigurationException;
+use Tallboy\Exceptions\InvalidConfigurationException;
 
 class InvalidIconSetException extends InvalidConfigurationException
 {

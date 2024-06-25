@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Concerns\Icons\Sets;
+namespace Tallboy\Icons;
 
-use Tallboy\Concerns\Icons\IconSet;
+use Brunocfalcao\BladeFeatherIcons\BladeFeatherIconsServiceProvider;
 
 class FeathericonSet implements IconSet
 {
@@ -15,7 +15,7 @@ class FeathericonSet implements IconSet
 
     public function enabled(): bool
     {
-        return class_exists('Brunocfalcao\BladeFeatherIcons\BladeFeatherIconsServiceProvider');
+        return class_exists(BladeFeatherIconsServiceProvider::class);
     }
 
     public function icons(): array

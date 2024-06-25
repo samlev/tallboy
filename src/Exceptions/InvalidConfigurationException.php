@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Exception;
+namespace Tallboy\Exceptions;
 
 class InvalidConfigurationException extends \RuntimeException
 {
