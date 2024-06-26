@@ -41,7 +41,14 @@ return [
     'components' => [
         'icon' => \Tallboy\View\Components\Icon::class,
         'form' => [
+            'field-error' => \Tallboy\View\Components\Form\FieldError::class,
+            'field-hint' => \Tallboy\View\Components\Form\FieldHint::class,
+            'input' => \Tallboy\View\Components\Form\Input::class,
+            'input-errors' => \Tallboy\View\Components\Form\InputErrors::class,
             'label' => \Tallboy\View\Components\Form\Label::class,
+            'opt-group' => \Tallboy\View\Components\Form\OptGroup::class,
+            'option' => \Tallboy\View\Components\Form\Option::class,
+            'select' => \Tallboy\View\Components\Form\Select::class,
         ],
         'feedback' > [],
     ]
