@@ -2,21 +2,55 @@
 
 declare(strict_types=1);
 
+use BladeUI\Icons\Factory;
 use Tallboy\Exceptions\Icons\InvalidIconSetException;
 use Tallboy\Features\SupportIcons\IconService;
 use Tallboy\Icons\FeathericonSet;
 use Tallboy\Icons\HeroiconSet;
 use Tallboy\Icons\IconSet;
 
-it('registers default icon sets', function () {
+it('registers default icon set', function () {
     $service = app(IconService::class);
 
-    expect($service->hasIconSet('heroicon'))->toBeTrue()
+    expect($service->hasIconSet('tallboicon'))->toBeTrue()
+        ->and($service->hasIconSet('feathericon'))->toBeFalse()
+        ->and($service->hasIconSet('heroicon'))->toBeFalse();
+});
+
+it('registers feathericon icon set if it is set', function () {
+    app(Factory::class)->add('feathericon', ['prefix' => 'feathericon', 'paths' => [__DIR__]]);
+
+    $service = app(IconService::class);
+
+    expect($service->hasIconSet('tallboicon'))->toBeTrue()
         ->and($service->hasIconSet('feathericon'))->toBeTrue()
-        ->and($service->hasIconSet('tallboicon'))->toBeTrue();
+        ->and($service->hasIconSet('heroicon'))->toBeFalse();
+});
+
+it('registers heroicon icon set if it is set', function () {
+    app(Factory::class)->add('heroicon', ['prefix' => 'heroicon', 'paths' => [__DIR__]]);
+
+    $service = app(IconService::class);
+
+    expect($service->hasIconSet('tallboicon'))->toBeTrue()
+        ->and($service->hasIconSet('feathericon'))->toBeFalse()
+        ->and($service->hasIconSet('heroicon'))->toBeTrue();
+});
+
+it('registers all default sets if they are set', function () {
+    app(Factory::class)->add('feathericon', ['prefix' => 'feathericon', 'paths' => [__DIR__]]);
+    app(Factory::class)->add('heroicon', ['prefix' => 'heroicon', 'paths' => [__DIR__]]);
+
+    $service = app(IconService::class);
+
+    expect($service->hasIconSet('tallboicon'))->toBeTrue()
+        ->and($service->hasIconSet('feathericon'))->toBeTrue()
+        ->and($service->hasIconSet('heroicon'))->toBeTrue();
 });
 
 it('allows custom icon sets', function () {
+    app(Factory::class)->add('heroicon', ['prefix' => 'heroicon', 'paths' => [__DIR__]]);
+
     app('config')->set('tallboy.icons.sets', [
         BuzzIconSet::class,
         HeroiconSet::class,
@@ -41,6 +75,9 @@ it('always registers tallboicon icon set', function () {
 });
 
 it('selects the configured icon set if the default is set', function () {
+    app(Factory::class)->add('feathericon', ['prefix' => 'feathericon', 'paths' => [__DIR__]]);
+    app(Factory::class)->add('heroicon', ['prefix' => 'heroicon', 'paths' => [__DIR__]]);
+
     $r = new \Random\Randomizer();
 
     $default = $r->shuffleArray([
@@ -78,6 +115,9 @@ it('selects the configured icon set if the default is set', function () {
 });
 
 it('selects the first non-tallboicon icon set if the default is not set', function () {
+    app(Factory::class)->add('feathericon', ['prefix' => 'feathericon', 'paths' => [__DIR__]]);
+    app(Factory::class)->add('heroicon', ['prefix' => 'heroicon', 'paths' => [__DIR__]]);
+
     $r = new \Random\Randomizer();
 
     $sets = $r->shuffleArray([
@@ -151,14 +191,24 @@ it('allows custom icons outside of the default set', function () {
 });
 
 it('selects the correct icons for the selected icon set', function (string $set, string $expected) {
+    app(Factory::class)->add('feathericon', ['prefix' => 'feathericon', 'paths' => [__DIR__]]);
+    app(Factory::class)->add('heroicon', ['prefix' => 'heroicon', 'paths' => [__DIR__]]);
+
+    app('config')->set('tallboy.icons.sets', [
+        BuzzIconSet::class,
+        HeroiconSet::class,
+        FeathericonSet::class,
+    ]);
+
     app('config')->set('tallboy.icons.default', $set);
 
     $service = app(IconService::class);
 
     expect($service->getIcon('alert'))->toBe($expected);
 })->with([
+    'buzz' => ['buzz', 'buzz-other-alert'],
     'feathericon' => ['feathericon', 'feathericon-alert-triangle'],
-    'heroicon' => ['heroicon', 'heroicon-exclamation-triangle'],
+    'heroicon' => ['heroicon', 'heroicon-o-exclamation-triangle'],
     'tallboicon' => ['tallboicon', 'tallboicon-alert'],
 ]);
 

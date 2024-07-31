@@ -15,7 +15,7 @@ class SupportIcons extends TallboyFeature
 {
     public function register(): void
     {
-        $this->app->singleton(IconService::class, function (Application $app) {
+        $this->app->bind(IconService::class, function (Application $app) {
             $service = new IconService();
 
             /** @var ?string $selected */

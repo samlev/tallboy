@@ -33,9 +33,9 @@ return [
     | Components
     |---------------------------------------------------------------------------
     |
-    | This allows configuration of the componemts available from Tallboy.
-    | Tallboy provides a number of blade components, broken up loosely
-    | into related groups. This allows subtituting your components.
+    | Tallboy provides a number of blade components broken up into functional
+    | groups. If you want to modify the functionality of the base classes,
+    | you can define your own components here for Tallboy to swap over.
     |
     */
     'components' => [

@@ -29,6 +29,6 @@ if (! function_exists('icon')) {
      */
     function icon(string $name, string $class = '', array $attributes = []): \BladeUI\Icons\Svg
     {
-        return app('tallboy-icon')->icon($name, $class, $attributes);
+        return app('tallboy-icons')->icon($name, $class, $attributes);
     }
 }

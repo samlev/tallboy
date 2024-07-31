@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tallboy\Icons;
 
-use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
+use BladeUI\Icons\Factory;
 
 class HeroiconSet implements IconSet
 {
@@ -15,53 +15,53 @@ class HeroiconSet implements IconSet
 
     public function enabled(): bool
     {
-        return class_exists(BladeHeroiconsServiceProvider::class);
+        return isset(app(Factory::class)->all()['heroicon']);
     }
 
     public function icons(): array
     {
         return [
             # Notification icons
-            'alert' => 'heroicon-exclamation-triangle',
-            'info' => 'heroicon-information-circle',
-            'error' => 'heroicon-shield-exclamation',
-            'help' => 'heroicon-question-mark-circle',
-            'success' => 'heroicon-check-circle',
+            'alert' => 'heroicon-o-exclamation-triangle',
+            'info' => 'heroicon-o-information-circle',
+            'error' => 'heroicon-o-shield-exclamation',
+            'help' => 'heroicon-o-question-mark-circle',
+            'success' => 'heroicon-o-check-circle',
 
             # Dropdown and modal icons
-            'dropdown' => 'heroicon-chevron-down',
-            'menu' => 'heroicon-bars-3',
-            'close' => 'heroicon-x-mark',
+            'dropdown' => 'heroicon-o-chevron-down',
+            'menu' => 'heroicon-o-bars-3',
+            'close' => 'heroicon-o-x-mark',
 
             # Filter icons
-            'filter' => 'heroicon-funnel',
-            'sort' => 'heroicon-chart-bar',
-            'unsorted' => 'heroicon-bars-3-center-left',
-            'next' => 'heroicon-chevron-double-right',
-            'previous' => 'heroicon-chevron-double-left',
-            'reset' => 'heroicon-arrow-uturn-left',
-            'refresh' => 'heroicon-arrow-path',
+            'filter' => 'heroicon-o-funnel',
+            'sort' => 'heroicon-o-chart-bar',
+            'unsorted' => 'heroicon-o-bars-3-center-left',
+            'next' => 'heroicon-o-chevron-double-right',
+            'previous' => 'heroicon-o-chevron-double-left',
+            'reset' => 'heroicon-o-arrow-uturn-left',
+            'refresh' => 'heroicon-o-arrow-path',
 
             # Loading icons
-            'loading' => 'heroicon-arrow-path',
-            'upload' => 'heroicon-arrow-up-on-square',
-            'download' => 'heroicon-arrow-down-on-square',
+            'loading' => 'heroicon-o-arrow-path',
+            'upload' => 'heroicon-o-arrow-up-on-square',
+            'download' => 'heroicon-o-arrow-down-on-square',
 
             # Form icons
-            'edit' => 'heroicon-pencil-square',
-            'delete' => 'heroicon-trash',
-            'cancel' => 'heroicon-no-symbol',
-            'save' => 'heroicon-inbox-arrow-down',
-            'add' => 'heroicon-squares-plus',
-            'remove' => 'heroicon-minus-circle',
-            'mask' => 'heroicon-eye-slash',
-            'unmask' => 'heroicon-eye',
-            'copy' => 'heroicon-clipboard',
+            'edit' => 'heroicon-o-pencil-square',
+            'delete' => 'heroicon-o-trash',
+            'cancel' => 'heroicon-o-no-symbol',
+            'save' => 'heroicon-o-inbox-arrow-down',
+            'add' => 'heroicon-o-squares-plus',
+            'remove' => 'heroicon-o-minus-circle',
+            'mask' => 'heroicon-o-eye-slash',
+            'unmask' => 'heroicon-o-eye',
+            'copy' => 'heroicon-o-clipboard',
 
             # Misc icons
-            'dark' => 'heroicon-moon',
-            'light' => 'heroicon-sun',
-            'system' => 'heroicon-computer-desktop',
+            'dark' => 'heroicon-o-moon',
+            'light' => 'heroicon-o-sun',
+            'system' => 'heroicon-o-computer-desktop',
         ];
     }
 }

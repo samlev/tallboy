@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tallboy\Icons;
 
-use Brunocfalcao\BladeFeatherIcons\BladeFeatherIconsServiceProvider;
+use BladeUI\Icons\Factory;
 
 class FeathericonSet implements IconSet
 {
@@ -15,7 +15,7 @@ class FeathericonSet implements IconSet
 
     public function enabled(): bool
     {
-        return class_exists(BladeFeatherIconsServiceProvider::class);
+        return isset(app(Factory::class)->all()['feathericon']);
     }
 
     public function icons(): array
