@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Tallboy\Support\Exception;
 
+use Illuminate\Support\Str;
+use ReflectionClass;
 use Throwable;
 
 /**
  * @template TException of Throwable
  *
  * @property-read class-string<TException> $exception
+ * @property-read string $message
+ * @property-read int $code
+ * @property-read ?Throwable $previous
  */
 class Factory
 {
@@ -30,13 +35,11 @@ class Factory
 
     /**
      * @param class-string<TException> $exception
-     * @return self<TException>
+     * @return TException
      */
-    public static function make(
-        string $exception,
-        mixed ...$params,
-    ): self {
-        return (new self($exception))->withParameters(...$params);
+    public static function make(string $exception, mixed ...$params): Throwable
+    {
+        return (new self($exception))->withParameters(...$params)->toThrowable();
     }
 
     /**
@@ -80,9 +83,9 @@ class Factory
             return $this->withCode($value);
         } elseif ($name === 'previous' && $value instanceof Throwable) {
             return $this->withPrevious($value);
+        } elseif ($this->isSettable($name)) {
+            $this->parameters[$name] = $value;
         }
-
-        $this->parameters[$name] = $value;
 
         return $this;
     }
@@ -112,10 +115,10 @@ class Factory
         $concrete = new $this->exception($this->message, $this->code, $this->previous);
 
         foreach ($this->parameters as $key => $value) {
-            if (property_exists($concrete, $key)) {
+            if ($this->propertyExists($key)) {
                 $concrete->{$key} = $value;
-            } elseif (method_exists($concrete, 'set' . ucfirst($key))) {
-                $concrete->{'set' . ucfirst($key)}($value);
+            } elseif ($this->setterExists($key)) {
+                $concrete->{'set' . Str::camel($key)}($value);
             }
         }
 
@@ -128,5 +131,42 @@ class Factory
     public function throw(): void
     {
         throw $this->toThrowable();
+    }
+
+    public function __get(string $property): mixed
+    {
+        return match ($property) {
+            'exception', 'message', 'code', 'previous' => $this->$property,
+            default => $this->parameters[$property] ?? null,
+        };
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    protected function propertyExists(string $property): bool
+    {
+        $class = (new ReflectionClass($this->exception));
+
+        if ($class->hasProperty($property)) {
+            $reflection = $class->getProperty($property);
+
+            return
+                $reflection->isPublic()
+                && !$reflection->isReadOnly()
+                && !$reflection->isStatic();
+        }
+
+        return false;
+    }
+
+    protected function setterExists(string $property): bool
+    {
+        return method_exists($this->exception, 'set' . Str::camel($property));
+    }
+
+    protected function isSettable(string $property): bool
+    {
+        return $this->propertyExists($property) || $this->setterExists($property);
     }
 }

@@ -37,7 +37,7 @@ trait MakesExceptions
     public static function factory(mixed ...$params): Factory
     {
         /** @var Factory<static> $factory */
-        $factory = Factory::make(static::class);
+        $factory = new Factory(static::class);
 
         return $factory->withParameters(...$params);
     }
