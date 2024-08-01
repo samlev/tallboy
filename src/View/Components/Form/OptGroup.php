@@ -10,8 +10,12 @@ use Tallboy\Support\Options\OptGroupData;
 
 class OptGroup extends Component
 {
-    public ?OptGroupData $group;
-    public ?string $label;
+    public function __construct(
+        public ?OptGroupData $group = null,
+        public ?string $label = null,
+    ) {
+        //
+    }
 
     public function render(): View
     {

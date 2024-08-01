@@ -4,7 +4,7 @@
   @hasSlot($label)
   {{ $label }}
   @else
-    {{ $guessLabel() }}
+    {{ $label() }}
     @endHasSlot
     <div @class(['flex flex-col gap-0.5', 'w-full grow' => $fullWidth])>
       <select {{ $attributes->class(['font-medium rounded invalid:border-red-500 disabled:opacity-50', 'w-full' => $fullWidth, 'multiple' => $multiple]) }}>

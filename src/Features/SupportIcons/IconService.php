@@ -115,7 +115,7 @@ class IconService
     public function setIconSet(string $iconSet): self
     {
         if (! $this->hasIconSet($iconSet)) {
-            throw InvalidIconSetException::make($iconSet);
+            throw InvalidIconSetException::make(set: $iconSet);
         }
         $this->iconSet = $iconSet;
         $this->icons = $this->iconSets[$iconSet];

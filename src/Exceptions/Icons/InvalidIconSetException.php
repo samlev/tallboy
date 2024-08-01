@@ -10,11 +10,8 @@ class InvalidIconSetException extends InvalidConfigurationException
 {
     public string $set;
 
-    public static function make(string $set): self
+    public static function makeMessage(string $set = 'default'): string
     {
-        $exception = new self(sprintf('The icon set [%s] cannot be found.', $set));
-        $exception->set = $set;
-
-        return $exception;
+        return sprintf('The icon set [%s] cannot be found.', $set);
     }
 }

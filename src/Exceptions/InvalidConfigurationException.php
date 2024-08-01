@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Tallboy\Exceptions;
 
-class InvalidConfigurationException extends \RuntimeException
+use RuntimeException;
+use Tallboy\Support\Exception\MakesExceptions;
+
+class InvalidConfigurationException extends RuntimeException
 {
+    use MakesExceptions;
 }

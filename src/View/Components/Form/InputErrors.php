@@ -10,10 +10,14 @@ use Illuminate\View\Component;
 
 class InputErrors extends Component
 {
-    /** @var string[] */
-    public array $fields = [];
-    /** @var string[] */
-    public array $messages = [];
+    public function __construct(
+        /** @var string[] */
+        public array $fields = [],
+        /** @var string[] */
+        public array $messages = [],
+    ) {
+        //
+    }
 
     public function render(): View
     {
@@ -29,7 +33,7 @@ class InputErrors extends Component
             ->flatmap(fn ($field) => $errors->get($field))
             ->all();
 
-        return collect($this->messages)
+        return collect($this->messages ?? [])
             ->merge($fieldErrors)
             ->flatten()
             ->unique()

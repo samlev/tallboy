@@ -10,9 +10,13 @@ use Tallboy\Support\Options\OptionData;
 
 class Option extends Component
 {
-    public ?OptionData $option;
-    public ?string $value;
-    public ?string $label;
+    public function __construct(
+        public ?OptionData $option = null,
+        public ?string $value = null,
+        public ?string $label = null,
+    ) {
+        //
+    }
 
     public function render(): View
     {

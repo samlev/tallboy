@@ -4,82 +4,76 @@ declare(strict_types=1);
 
 namespace Tallboy\View\Components\Form;
 
-use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Illuminate\View\ComponentAttributeBag;
 
 abstract class BaseInput extends Component
 {
-    public bool $fullWidth = true;
-    public bool $showErrors = true;
-    public bool $stacked = false;
-    public ?string $placeholder = null;
-    public ?string $label = null;
-    /**
-     * @var string[]|string|null $hint
-     */
-    public array|string|null $hint = null;
-    /**
-     * @var string[]|string|null $errorBags
-     */
-    public string|array|null $errorBags = null;
-    /**
-     * @var string[]|string|null $messages
-     */
-    public string|array|null $messages = null;
+    public function __construct(
+        /** @var string[] $errorBags */
+        public array $errorBags = [],
+        /** @var string[] $messages */
+        public array $messages = [],
+        /** @var string[] $hints */
+        public array $hints = [],
+        public bool $fullWidth = true,
+        public bool $stacked = false,
+        public bool $hideErrors = false,
+        public ?string $label = null,
+    ) {
+        //
+    }
 
-    /**
-     * @return string[]
-     */
-    public function getErrorBags(): array
+    public function shouldHideErrors(ComponentAttributeBag $attributes): bool
     {
-        return collect(Arr::wrap($this->errorBags))
-            ->merge($this->possibleFieldNames())
-            ->values()
-            ->unique()
-            ->filter()
-            ->all();
+        return $this->hideErrors || (empty($this->getErrorBags($attributes)) && empty($this->messages));
     }
 
     /**
      * @return string[]
      */
-    public function getMessages(): array
+    public function getErrorBags(ComponentAttributeBag $attributes): array
     {
-        return collect(Arr::wrap($this->messages))
-            ->unique()
+        return Collection::make($this->errorBags ?: $this->guessFieldNames($attributes))
+            ->map(fn ($bag) => trim($bag))
             ->filter()
+            ->unique()
             ->values()
             ->all();
     }
 
+    public function guessLabel(ComponentAttributeBag $attributes): string
+    {
+        return $this->label
+            ?? Str::headline(
+                $this->getPlaceholder($attributes)
+                ?: $this->guessFieldNames($attributes)[0]
+                ?? ''
+            );
+    }
+
+    public function getPlaceholder(ComponentAttributeBag $attributes): ?string
+    {
+        return (property_exists($this, 'placeholder') && is_string($this->placeholder))
+            ? $this->placeholder
+            : (($attributes->get('placeholder') . '') ?: null);
+    }
+
     /**
      * @return string[]
      */
-    public function getHints(): array
+    protected function guessFieldNames(ComponentAttributeBag $attributes): array
     {
-        return array_filter(Arr::wrap($this->hint));
-    }
-
-    public function guessLabel(): string
-    {
-        return $this->label ?: str($this->placeholder ?: $this->guessName())->headline()->toString();
-    }
-
-    protected function guessName(): string
-    {
-        return $this->possibleFieldNames()[0] ?? '';
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function possibleFieldNames(): array
-    {
-        return collect([$this->attributes->get('name')])
-            ->merge($this->attributes->whereStartsWith('x-model')->getAttributes())
-            ->merge($this->attributes->whereStartsWith('wire:model')->getAttributes())
+        return Collection::make([
+            $attributes->get('name', ''),
+            ...$attributes->whereStartsWith(['wire:model', 'x-model'])->getAttributes(),
+            Str::snake($this->label ?? ''),
+        ])
+            ->map(fn ($name) => is_string($name) ? trim($name) : null)
+            ->filter()
             ->unique()
-            ->filter(fn ($name) => is_string($name) && trim($name))
             ->values()
             ->all();
     }

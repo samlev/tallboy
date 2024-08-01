@@ -18,14 +18,35 @@ use Tallboy\Support\Options\OptionData;
 class Select extends BaseInput
 {
     /**
-     * @var array<array-key, TOption>|Enumerable<array-key, TOption> $options
+     * @param string[] $errorBags
+     * @param string[] $messages
+     * @param string[] $hints
      */
-    public array|Enumerable $options = [];
-    public bool $multiple = false;
-    /**
-     * @var string|int|string[]|int[]|null
-     */
-    public string|int|array|null $selected = null;
+    public function __construct(
+        public bool $multiple = false,
+        /** @var array<array-key, TOption>|Enumerable<array-key, TOption> $options */
+        public array|Enumerable $options = [],
+        /** @var string|int|string[]|int[]|null */
+        public string|int|array|null $selected = null,
+        public ?string $placeholder = null,
+        array $errorBags = [],
+        array $messages = [],
+        array $hints = [],
+        bool $fullWidth = true,
+        bool $stacked = false,
+        bool $hideErrors = false,
+        ?string $label = null,
+    ) {
+        parent::__construct(
+            errorBags: $errorBags,
+            messages: $messages,
+            hints: $hints,
+            fullWidth: $fullWidth,
+            stacked: $stacked,
+            hideErrors: $hideErrors,
+            label: $label,
+        );
+    }
 
     public function render(): View
     {
