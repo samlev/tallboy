@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tallboy\View\Components\Form;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\View\Component;
+use Tallboy\View\Component;
 
 class Label extends Component
 {

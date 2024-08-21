@@ -10,6 +10,7 @@
           'w-full' => $fullWidth,
         ])->merge([
           'type' => 'text',
+          'placeholder' => $placeholder,
         ])
     }} />
     {{ $slot }}
@@ -17,7 +18,7 @@
       <x-form.field-hint>{{ $hint }}</x-form.field-hint>
     @endforeach
     @unless($shouldHideErrors($attributes))
-      <x-form.input-errors :messages="$messages" :fields="$getErrorBags($attributes)"/>
+      <x-form.input-errors :$messages :fields="$getErrorBags($attributes)" />
     @endunless
   </div>
 </x-form.label>

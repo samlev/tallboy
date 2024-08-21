@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Eloquent\Model;
-use Tallboy\Support\Options\OptGroupData;
-use Tallboy\Support\Options\OptionData;
+use Tallboy\View\Data\Options\OptGroupData;
+use Tallboy\View\Data\Options\OptionData;
 
 it('makes options from array of strings', function () {
     $group = OptGroupData::make('foo', ['bar', 'baz']);

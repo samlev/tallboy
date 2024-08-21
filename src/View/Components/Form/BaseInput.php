@@ -6,25 +6,22 @@ namespace Tallboy\View\Components\Form;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
+use Tallboy\View\Component;
 
 abstract class BaseInput extends Component
 {
-    public function __construct(
-        /** @var string[] $errorBags */
-        public array $errorBags = [],
-        /** @var string[] $messages */
-        public array $messages = [],
-        /** @var string[] $hints */
-        public array $hints = [],
-        public bool $fullWidth = true,
-        public bool $stacked = false,
-        public bool $hideErrors = false,
-        public ?string $label = null,
-    ) {
-        //
-    }
+    /** @var string[] $errorBags */
+    public array $errorBags = [];
+    /** @var string[] $messages */
+    public array $messages = [];
+    /** @var string[] $hints */
+    public array $hints = [];
+    public bool $fullWidth = true;
+    public bool $stacked = false;
+    public bool $hideErrors = false;
+    public ?string $label = null;
+    public ?string $placeholder = null;
 
     public function shouldHideErrors(ComponentAttributeBag $attributes): bool
     {
@@ -48,17 +45,10 @@ abstract class BaseInput extends Component
     {
         return $this->label
             ?? Str::headline(
-                $this->getPlaceholder($attributes)
-                ?: $this->guessFieldNames($attributes)[0]
-                ?? ''
+                $this->placeholder
+                    ?: $this->guessFieldNames($attributes)[0]
+                    ?? ''
             );
-    }
-
-    public function getPlaceholder(ComponentAttributeBag $attributes): ?string
-    {
-        return (property_exists($this, 'placeholder') && is_string($this->placeholder))
-            ? $this->placeholder
-            : (($attributes->get('placeholder') . '') ?: null);
     }
 
     /**

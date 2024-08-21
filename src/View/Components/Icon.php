@@ -5,16 +5,11 @@ declare(strict_types=1);
 namespace Tallboy\View\Components;
 
 use Closure;
-use Illuminate\View\Component;
+use Tallboy\View\Component;
 
 class Icon extends Component
 {
     public string $name;
-
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
 
     public function render(): Closure
     {

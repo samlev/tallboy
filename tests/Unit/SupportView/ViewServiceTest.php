@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use Illuminate\View\ComponentSlot;
 use Tallboy\Features\SupportView\ViewService;
+use Tallboy\View\Component;
 
 it('detects if something is a slot', function () {
     $service = new ViewService();

@@ -27,7 +27,7 @@ it('renders the component', function () {
 
 it('passes additional attributes to the base input', function () {
     $rendered = $this->getDocument(Blade::render(
-        '<x-form.input type="email" placeholder="Foo" label="Bar" name="baz" :$messages />',
+        '<x-form.input type="email" placeholder="Foo" label="Bar" name="baz" :messages="$messages" />',
         ['messages' => ['Bing', 'Bang', 'Bong']],
     ));
     $input = $this->getNode($rendered, 'input');

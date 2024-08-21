@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Tallboy\Support\Options\OptionData;
-use Tallboy\Support\Options\Optionable;
+use Tallboy\View\Data\Options\Optionable;
+use Tallboy\View\Data\Options\OptionData;
 
 it('makes option from strings', function () {
     $option = OptionData::make('foo', 'bar');

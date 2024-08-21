@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tallboy\Support\Options;
+namespace Tallboy\View\Data\Options;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Enumerable;

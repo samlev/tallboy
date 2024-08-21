@@ -1,4 +1,4 @@
-@use(Tallboy\Support\Options\OptGroupData)
+@use(Tallboy\View\Data\Options\OptGroupData)
 <x-form.label
   :attributes="attrs($label)->class(['w-full' => $fullWidth, 'flex-col' => $stacked, 'items-stretch' => $fullWidth && $stacked])">
   @hasSlot($label)
@@ -11,9 +11,9 @@
         {{ $slot }}
         @foreach($selectOptions as $option)
           @if($option instanceof OptGroupData)
-            <x-form.opt-group :group="$option" />
+            <x-form.opt-group :group="$option"/>
           @else
-            <x-form.option :option="$option" />
+            <x-form.option :option="$option"/>
           @endif
         @endforeach
       </select>

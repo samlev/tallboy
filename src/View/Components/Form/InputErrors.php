@@ -6,18 +6,14 @@ namespace Tallboy\View\Components\Form;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\ViewErrorBag;
-use Illuminate\View\Component;
+use Tallboy\View\Component;
 
 class InputErrors extends Component
 {
-    public function __construct(
-        /** @var string[] */
-        public array $fields = [],
-        /** @var string[] */
-        public array $messages = [],
-    ) {
-        //
-    }
+    /** @var string[] */
+    public array $fields = [];
+    /** @var string[] */
+    public array $messages = [];
 
     public function render(): View
     {
